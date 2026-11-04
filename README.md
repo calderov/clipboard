@@ -70,4 +70,3 @@ offer the protocol other clipboard managers use (`wl-paste --watch` doesn't work
 `GDK_BACKEND=x11` and runs through XWayland. The compositor mirrors the clipboard between Wayland
 and X11, and X11 apps can watch it in the background. Copying and pasting still work across all
 apps.
-# clipboard

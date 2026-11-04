@@ -1,0 +1,17 @@
+.clipboard-header {
+    padding: 12px 12px 8px 12px;
+}
+
+.clipboard-list {
+    background: transparent;
+    padding-bottom: 4px;
+}
+
+.clipboard-list > row.clipboard-item {
+    margin: 0 12px 8px 12px;
+    padding: 8px 4px 8px 12px;
+}
+
+.clipboard-item .thumbnail {
+    border-radius: 3px;
+}
