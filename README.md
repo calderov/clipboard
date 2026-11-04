@@ -2,9 +2,9 @@
 
 A Windows-style clipboard history for elementary OS, written in Vala with GTK 4 and Granite.
 
-It runs in the background, remembers the last 25 texts, images and files you copied, and shows them in a
-small window when you press a shortcut (Super+V suggested). Click an entry to put it back on the
-clipboard, then paste as usual with Ctrl+V.
+It runs in the background, remembers the last 25 texts and images you copied, and shows them in a
+small window when you press a shortcut (Super+V suggested). Click an entry and it is pasted into
+the app you were using (see [Auto-paste](#auto-paste)).
 
 History is kept in memory only. Nothing is written to disk, and it is gone when you log out.
 
@@ -53,11 +53,37 @@ gsettings set $SCHEMA binding '<Super>v'
 | Action | How |
 | --- | --- |
 | Open / close the history | Super+V (runs the command again) |
-| Copy an entry back to the clipboard | Click it, or select it with the arrow keys and press Enter |
+| Paste an entry | Click it, or select it with the arrow keys and press Enter |
 | Remove an entry | ✕ button, or Delete |
 | Remove everything | **Clear all** |
 | Hide the window | Esc, or click anywhere else |
 | Stop the background monitor | Ctrl+Q in the window, or `io.github.calderov.ClipboardHistory --quit` |
+
+## Auto-paste
+
+After you pick an entry, the window closes and the app presses Ctrl+V in the app you were using.
+It works out which key types "v" in your keyboard layout, so layouts like Dvorak work too.
+
+Wayland doesn't let one app send key presses to another, so the app creates a virtual keyboard
+through `/dev/uinput`. That needs write access to `/dev/uinput` for the logged-in user. Check with:
+
+```sh
+getfacl /dev/uinput | grep "user:$USER"
+```
+
+If that prints nothing (Steam's input rules grant this access, so it may already be set), add a
+udev rule and log out and back in:
+
+```sh
+echo 'KERNEL=="uinput", SUBSYSTEM=="misc", TAG+="uaccess", OPTIONS+="static_node=uinput"' \
+    | sudo tee /etc/udev/rules.d/60-clipboard-history-uinput.rules
+```
+
+This lets programs you run create virtual input devices while you're logged in. Without that
+access the app still works: picking an entry only copies it, and you paste with Ctrl+V yourself.
+
+Terminals usually paste with Ctrl+Shift+V. Elementary Terminal accepts Ctrl+V while its "natural
+copy/paste" setting is on, which is the default.
 
 ## Running from the build directory
 
