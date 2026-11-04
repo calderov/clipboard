@@ -8,7 +8,8 @@ clipboard, then paste as usual with Ctrl+V.
 
 History is kept in memory only. Nothing is written to disk, and it is gone when you log out.
 
-<img width="2240" height="1400" alt="image" src="https://github.com/user-attachments/assets/e1af1c0a-e42d-4abf-b935-05bb232fa509" />
+<img width="1068" height="945" alt="image" src="https://github.com/user-attachments/assets/16979f11-6431-4fee-8835-65285ea349a2" />
+
 
 ## Build
 
