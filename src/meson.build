@@ -6,12 +6,15 @@ executable(
     'HistoryStore.vala',
     'ItemRow.vala',
     'MainWindow.vala',
+    'VirtualKeyboard.vala',
     resources,
     dependencies: [
         dependency('glib-2.0'),
         dependency('gobject-2.0'),
         dependency('gtk4'),
         dependency('granite-7'),
+        meson.get_compiler('vala').find_library('posix'),
+        meson.get_compiler('vala').find_library('linux'),
     ],
     install: true,
 )

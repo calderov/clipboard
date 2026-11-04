@@ -1,8 +1,12 @@
 public class ClipboardHistory.Application : Gtk.Application {
     private const uint MAX_ITEMS = 25;
 
+    // How long to wait after closing the window for focus to return to the previous app.
+    private const uint PASTE_DELAY_MS = 150;
+
     private HistoryStore store;
     private ClipboardMonitor monitor;
+    private VirtualKeyboard keyboard;
     private MainWindow? window = null;
     private bool start_in_background = false;
 
@@ -85,6 +89,8 @@ public class ClipboardHistory.Application : Gtk.Application {
         monitor = new ClipboardMonitor (Gdk.Display.get_default ().get_clipboard ());
         monitor.item_copied.connect (store.add);
 
+        keyboard = new VirtualKeyboard ();
+
         // Keep monitoring after the window is closed.
         hold ();
     }
@@ -118,6 +124,13 @@ public class ClipboardHistory.Application : Gtk.Application {
         monitor.restore (item);
         store.promote (item);
         window.close ();
+
+        if (keyboard.available) {
+            Timeout.add (PASTE_DELAY_MS, () => {
+                keyboard.paste ();
+                return Source.REMOVE;
+            });
+        }
     }
 
     public static int main (string[] args) {
