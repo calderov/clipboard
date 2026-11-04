@@ -2,11 +2,13 @@
 
 A Windows-style clipboard history for elementary OS, written in Vala with GTK 4 and Granite.
 
-It runs in the background, remembers the last 25 texts and images you copied, and shows them in a
+It runs in the background, remembers the last 25 texts, images and files you copied, and shows them in a
 small window when you press a shortcut (Super+V suggested). Click an entry to put it back on the
 clipboard, then paste as usual with Ctrl+V.
 
 History is kept in memory only. Nothing is written to disk, and it is gone when you log out.
+
+<img width="2240" height="1400" alt="image" src="https://github.com/user-attachments/assets/e1af1c0a-e42d-4abf-b935-05bb232fa509" />
 
 ## Build
 
