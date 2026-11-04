@@ -8,6 +8,9 @@ the app you were using (see [Auto-paste](#auto-paste)).
 
 History is kept in memory only. Nothing is written to disk, and it is gone when you log out.
 
+<img width="1068" height="945" alt="image" src="https://github.com/user-attachments/assets/16979f11-6431-4fee-8835-65285ea349a2" />
+
+
 ## Build
 
 Dependencies (elementary OS 8):
